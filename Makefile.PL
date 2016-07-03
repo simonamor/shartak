@@ -20,7 +20,16 @@ requires 'Config::General'; # This should reflect the config file format you've 
 test_requires 'Test::More' => '0.88';
 catalyst;
 
+# For the config
+requires 'YAML::XS';
+
+# Template view
 requires 'Catalyst::Helper::View::TT';
+
+# Session handling
+requires 'Catalyst::Plugin::Session';
+requires 'Catalyst::Plugin::Session::State::Cookie';
+requires 'Catalyst::Plugin::Session::Store::DBI';
 
 install_script glob('script/*.pl');
 auto_install;

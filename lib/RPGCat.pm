@@ -17,9 +17,12 @@ use Catalyst::Runtime 5.80;
 #                 directory
 
 use Catalyst qw/
-    -Debug
     ConfigLoader
     Static::Simple
+
+    Session
+    Session::Store::DBI
+    Session::State::Cookie
 /;
 
 extends 'Catalyst';
@@ -45,7 +48,22 @@ __PACKAGE__->config(
 # Default view for pages
 __PACKAGE__->config(
     default_view => 'Web',
+
+    'Plugin::Session' => {
+        dbi_dbh   => 'DB', # which means RPGCat::Model::DB
+        dbi_table => 'sessions',
+        dbi_id_field => 'id',
+        dbi_data_field => 'session_data',
+        dbi_expires_field => 'expires',
+
+        expires   => 3600*72,   # 72 hours (in seconds)
+
+        # If nothing in the session changed, only refresh the expiry
+        # time if it's got less than 70 hours until it expires
+        expiry_threshold => 3600*70,
+    },
 );
+
 
 # Start the application
 __PACKAGE__->setup();
