@@ -17,7 +17,7 @@
 </head>
 <body>
 [% content %]
-<script type="text/javascript" src="/js/jquery-1.12.1.min.js"></script>
+<script type="text/javascript" src="/js/jquery-1.12.4.min.js"></script>
 [% FOREACH js IN page.js_files;
     IF NOT js.search('^http') AND NOT js.search('^/');
         js = "/js/" _ js;
