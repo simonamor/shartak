@@ -31,6 +31,11 @@ requires 'Catalyst::Plugin::Session';
 requires 'Catalyst::Plugin::Session::State::Cookie';
 requires 'Catalyst::Plugin::Session::Store::DBI';
 
+requires 'DBIx::Class::Schema::Loader';
+requires 'Catalyst::Helper::Model::DBIC::Schema';
+requires 'MooseX::NonMoose';
+requires 'DBD::mysql';
+
 install_script glob('script/*.pl');
 auto_install;
 WriteAll;
