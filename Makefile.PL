@@ -20,6 +20,8 @@ requires 'Config::General'; # This should reflect the config file format you've 
 test_requires 'Test::More' => '0.88';
 catalyst;
 
+requires 'Catalyst::Helper::View::TT';
+
 install_script glob('script/*.pl');
 auto_install;
 WriteAll;

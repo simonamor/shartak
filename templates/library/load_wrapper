@@ -1,0 +1,12 @@
+[%-
+    # Included via WRAPPER => "load_wrapper"
+    SET wrapper = "default";
+    IF page.wrapper;
+        wrapper = page.wrapper;
+    END;
+    IF wrapper;
+        wrapper_name = "wrappers/$wrapper";
+        PROCESS $wrapper_name;
+    ELSE;
+        content;
+END -%]
