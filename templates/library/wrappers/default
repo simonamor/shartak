@@ -16,6 +16,15 @@
 [% IF page.extra_head_html; page.extra_head_html; END -%]
 </head>
 <body>
+
+
+[% IF status_msg OR error_msg -%]
+<div class="status_container">
+[% IF status_msg %]<div class="status_message">[% status_msg %]</div>[% END %]
+[% IF error_msg %]<div class="status_message error">[% error_msg %]</div>[% END %]
+</div>
+[% END -%]
+
 [% content %]
 <script type="text/javascript" src="/js/jquery-1.12.4.min.js"></script>
 [% FOREACH js IN page.js_files;

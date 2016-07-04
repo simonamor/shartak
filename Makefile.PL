@@ -32,9 +32,17 @@ requires 'Catalyst::Plugin::Session::State::Cookie';
 requires 'Catalyst::Plugin::Session::Store::DBI';
 
 requires 'DBIx::Class::Schema::Loader';
+requires 'DBIx::Class::TimeStamp';
+requires 'DBIx::Class::PassphraseColumn';
 requires 'Catalyst::Helper::Model::DBIC::Schema';
 requires 'MooseX::NonMoose';
 requires 'DBD::mysql';
+requires 'Digest::SHA256';
+
+requires 'Catalyst::Plugin::Authentication';
+requires 'Catalyst::Plugin::Authorization::Roles';
+requires 'Catalyst::Plugin::StatusMessage';
+requires 'Catalyst::Authentication::Store::DBIx::Class';
 
 install_script glob('script/*.pl');
 auto_install;

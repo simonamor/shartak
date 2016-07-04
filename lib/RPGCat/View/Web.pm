@@ -2,6 +2,8 @@ package RPGCat::View::Web;
 use Moose;
 use namespace::autoclean;
 
+use RPGCat;
+
 extends 'Catalyst::View::TT';
 
 __PACKAGE__->config(

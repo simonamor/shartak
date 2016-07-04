@@ -28,9 +28,17 @@ The root page (/)
 
 =cut
 
-sub index :Path :Args(0) {
+sub root_index_index :Path('/index') :Args(0) {
+    my ($self, $c) = @_;
+    $c->response->redirect( $c->uri_for("/") );
+}
+
+sub root_index :Path('/') :Args(0) {
     my ( $self, $c ) = @_;
 
+    my $counter = ++ $c->session->{ counter };
+
+    $c->stash( counter => $counter );
     $c->stash( template => "index.html" );
 }
 
@@ -44,6 +52,26 @@ sub default :Path {
     my ( $self, $c ) = @_;
     $c->response->body( 'Page not found' );
     $c->response->status(404);
+}
+
+sub logout :Path('/logout') :Args(0) {
+    my ( $self, $c ) = @_;
+
+    # Log the user out
+    $c->logout;
+
+    # Send the user to the starting point
+    $c->response->redirect($c->uri_for('/'));
+}
+
+
+sub auto :Private {
+    my ($self, $c) = @_;
+
+    # Load the status messages into the stash
+    $c->load_status_msgs;
+
+    return 1;
 }
 
 =head2 end

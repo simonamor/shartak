@@ -20,9 +20,14 @@ use Catalyst qw/
     ConfigLoader
     Static::Simple
 
+    Authentication
+    Authorization::Roles
+
     Session
     Session::Store::DBI
     Session::State::Cookie
+
+    StatusMessage
 /;
 
 extends 'Catalyst';
@@ -43,6 +48,25 @@ __PACKAGE__->config(
     # Disable deprecated behavior needed by old applications
     disable_component_resolution_regex_fallback => 1,
     enable_catalyst_header => 1, # Send X-Catalyst header
+);
+
+# Authentication
+__PACKAGE__->config(
+    'Plugin::Authentication' => {
+        default => {
+            store => {
+                class           => 'DBIx::Class',
+                user_model      => 'DB::Account',
+                role_relation   => 'roles',
+                role_field      => 'role',
+                use_userdata_from_session   => 0, # cache user data in session
+            },
+            credential => {
+                class           => 'Password',
+                password_type   => 'self_check',
+            },
+        },
+    },
 );
 
 # Default view for pages

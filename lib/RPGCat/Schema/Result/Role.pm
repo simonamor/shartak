@@ -1,12 +1,12 @@
 use utf8;
-package RPGCat::Schema::Result::Session;
+package RPGCat::Schema::Result::Role;
 
 # Created by DBIx::Class::Schema::Loader
 # DO NOT MODIFY THE FIRST PART OF THIS FILE
 
 =head1 NAME
 
-RPGCat::Schema::Result::Session
+RPGCat::Schema::Result::Role
 
 =cut
 
@@ -34,56 +34,64 @@ extends 'DBIx::Class::Core';
 
 __PACKAGE__->load_components("InflateColumn::DateTime", "TimeStamp", "PassphraseColumn");
 
-=head1 TABLE: C<sessions>
+=head1 TABLE: C<roles>
 
 =cut
 
-__PACKAGE__->table("sessions");
+__PACKAGE__->table("roles");
 
 =head1 ACCESSORS
 
-=head2 id
+=head2 role_id
+
+  data_type: 'integer'
+  extra: {unsigned => 1}
+  is_auto_increment: 1
+  is_nullable: 0
+
+=head2 role
 
   data_type: 'char'
   is_nullable: 0
-  size: 72
+  size: 255
 
-=head2 session_data
+=head2 description
 
-  data_type: 'mediumtext'
+  data_type: 'char'
   is_nullable: 1
-
-=head2 expires
-
-  data_type: 'integer'
-  is_nullable: 1
+  size: 255
 
 =cut
 
 __PACKAGE__->add_columns(
-  "id",
-  { data_type => "char", is_nullable => 0, size => 72 },
-  "session_data",
-  { data_type => "mediumtext", is_nullable => 1 },
-  "expires",
-  { data_type => "integer", is_nullable => 1 },
+  "role_id",
+  {
+    data_type => "integer",
+    extra => { unsigned => 1 },
+    is_auto_increment => 1,
+    is_nullable => 0,
+  },
+  "role",
+  { data_type => "char", is_nullable => 0, size => 255 },
+  "description",
+  { data_type => "char", is_nullable => 1, size => 255 },
 );
 
 =head1 PRIMARY KEY
 
 =over 4
 
-=item * L</id>
+=item * L</role_id>
 
 =back
 
 =cut
 
-__PACKAGE__->set_primary_key("id");
+__PACKAGE__->set_primary_key("role_id");
 
 
 # Created by DBIx::Class::Schema::Loader v0.07045 @ 2016-07-04 23:18:44
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:eSWgJKzjPpoa/Nle+pQ6Yw
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:7pNsRuGV0rOuBkZ/6hIgDw
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration
