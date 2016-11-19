@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+ <html lang="en">
+<head>
+<meta charset="utf-8">
+<title>[% SET ptitle = page.title; DEFAULT ptitle = 'RPGWNN'; ptitle | html %]</title>
+<link rel="stylesheet" type="text/css" href="/css/rpgwnn.css" />
+[% FOREACH css IN page.css_files;
+    IF NOT css.search('^https?://') AND NOT css.search('^/');
+        css = "/css/" _ css;
+    END -%]<link rel="stylesheet" type="text/css" href="[% css %]" />[% END -%]
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!--[if lt IE 9]><script src="/js/html5shiv.min.js"></script><![endif]-->
+
+[% IF page.extra_head_html; page.extra_head_html; END -%]
+</head>
+<body>
+
+
+[% IF status_msg OR error_msg -%]
+<div class="status_container">
+[% IF status_msg %]<div class="status_message">[% status_msg %]</div>[% END %]
+[% IF error_msg %]<div class="status_message error">[% error_msg %]</div>[% END %]
+</div>
+[% END -%]
+
+[% content %]
+<script type="text/javascript" src="/js/jquery-1.12.4.min.js"></script>
+[% FOREACH js IN page.js_files;
+    IF NOT js.search('^http') AND NOT js.search('^/');
+        js = "/js/" _ js;
+    END
+-%]<script type="text/javascript" src="[% js %]"></script>
+[%- END;
+    IF page.extra_footer_html; page.extra_footer_html; END -%]
+</body>
+</html>
