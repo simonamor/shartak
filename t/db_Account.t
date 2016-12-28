@@ -1,7 +1,10 @@
 use strict;
 use warnings;
+
 use Test::More;
 use Test::DBIx::Class;
+
+is Account->count, 0, 'no records in accounts table';
 
 ok my $account = Account->create({
     email => 'first@example.com',
