@@ -1,0 +1,231 @@
+---
+schema:
+  procedures: {}
+  tables:
+    account_roles:
+      constraints:
+        - deferrable: 1
+          expression: ''
+          fields:
+            - account_id
+            - role_id
+          match_type: ''
+          name: ''
+          on_delete: ''
+          on_update: ''
+          options: []
+          reference_fields: []
+          reference_table: ''
+          type: PRIMARY KEY
+      fields:
+        account_id:
+          data_type: integer
+          default_value: ~
+          extra:
+            unsigned: 1
+          is_nullable: 0
+          is_primary_key: 1
+          is_unique: 0
+          name: account_id
+          order: 1
+          size:
+            - 0
+        role_id:
+          data_type: integer
+          default_value: ~
+          extra:
+            unsigned: 1
+          is_nullable: 0
+          is_primary_key: 1
+          is_unique: 0
+          name: role_id
+          order: 2
+          size:
+            - 0
+      indices: []
+      name: account_roles
+      options: []
+      order: 1
+    accounts:
+      constraints:
+        - deferrable: 1
+          expression: ''
+          fields:
+            - account_id
+          match_type: ''
+          name: ''
+          on_delete: ''
+          on_update: ''
+          options: []
+          reference_fields: []
+          reference_table: ''
+          type: PRIMARY KEY
+        - deferrable: 1
+          expression: ''
+          fields:
+            - email
+          match_type: ''
+          name: email
+          on_delete: ''
+          on_update: ''
+          options: []
+          reference_fields: []
+          reference_table: ''
+          type: UNIQUE
+      fields:
+        account_id:
+          data_type: integer
+          default_value: ~
+          extra:
+            unsigned: 1
+          is_auto_increment: 1
+          is_nullable: 0
+          is_primary_key: 1
+          is_unique: 0
+          name: account_id
+          order: 1
+          size:
+            - 0
+        email:
+          data_type: char
+          default_value: ~
+          is_nullable: 0
+          is_primary_key: 0
+          is_unique: 1
+          name: email
+          order: 2
+          size:
+            - 128
+        password:
+          data_type: text
+          default_value: ~
+          is_nullable: 1
+          is_primary_key: 0
+          is_unique: 0
+          name: password
+          order: 3
+          size:
+            - 0
+      indices: []
+      name: accounts
+      options: []
+      order: 2
+    roles:
+      constraints:
+        - deferrable: 1
+          expression: ''
+          fields:
+            - role_id
+          match_type: ''
+          name: ''
+          on_delete: ''
+          on_update: ''
+          options: []
+          reference_fields: []
+          reference_table: ''
+          type: PRIMARY KEY
+      fields:
+        description:
+          data_type: char
+          default_value: ~
+          is_nullable: 1
+          is_primary_key: 0
+          is_unique: 0
+          name: description
+          order: 3
+          size:
+            - 255
+        role:
+          data_type: char
+          default_value: ~
+          is_nullable: 0
+          is_primary_key: 0
+          is_unique: 0
+          name: role
+          order: 2
+          size:
+            - 255
+        role_id:
+          data_type: integer
+          default_value: ~
+          extra:
+            unsigned: 1
+          is_auto_increment: 1
+          is_nullable: 0
+          is_primary_key: 1
+          is_unique: 0
+          name: role_id
+          order: 1
+          size:
+            - 0
+      indices: []
+      name: roles
+      options: []
+      order: 3
+    sessions:
+      constraints:
+        - deferrable: 1
+          expression: ''
+          fields:
+            - id
+          match_type: ''
+          name: ''
+          on_delete: ''
+          on_update: ''
+          options: []
+          reference_fields: []
+          reference_table: ''
+          type: PRIMARY KEY
+      fields:
+        expires:
+          data_type: integer
+          default_value: ~
+          is_nullable: 1
+          is_primary_key: 0
+          is_unique: 0
+          name: expires
+          order: 3
+          size:
+            - 0
+        id:
+          data_type: char
+          default_value: ~
+          is_nullable: 0
+          is_primary_key: 1
+          is_unique: 0
+          name: id
+          order: 1
+          size:
+            - 72
+        session_data:
+          data_type: mediumtext
+          default_value: ~
+          is_nullable: 1
+          is_primary_key: 0
+          is_unique: 0
+          name: session_data
+          order: 2
+          size:
+            - 0
+      indices: []
+      name: sessions
+      options: []
+      order: 4
+  triggers: {}
+  views: {}
+translator:
+  add_drop_table: 0
+  filename: ~
+  no_comments: 0
+  parser_args:
+    sources:
+      - Account
+      - AccountRole
+      - Role
+      - Session
+  parser_type: SQL::Translator::Parser::DBIx::Class
+  producer_args: {}
+  producer_type: SQL::Translator::Producer::YAML
+  show_warnings: 0
+  trace: 0
+  version: 0.11021
