@@ -9,7 +9,7 @@ use MooseX::NonMoose;
 use MooseX::MarkAsMethods autoclean => 1;
 extends 'DBIx::Class::Core';
 
-
+__PACKAGE__->table("maps");
 
 __PACKAGE__->add_columns(
   "tile_id",
@@ -19,12 +19,14 @@ __PACKAGE__->add_columns(
   "tile_y",
   {data_type => "integer",extra => { unsigned => 0 }, is_nullable => 0},
   "tile_z",
-  {data_type => "integer",extra => { unsigned => 0 }, is_nullable => 0}
+  {data_type => "integer",extra => { unsigned => 0 }, is_nullable => 0},
   );
 
 
 
-__PACKAGE__->set_primary_key("tile_x","tile_y","tile_z");
+__PACKAGE__->set_primary_key("tile_id");
+
+__PACKAGE__->add_unique_constraint("tile_coords" => ["tile_x","tile_y","tile_z"]);
 
 
 __PACKAGE__->has_one( 'tile' => 'RPGCat::Schema::Result::Tile', 'tile_id' );

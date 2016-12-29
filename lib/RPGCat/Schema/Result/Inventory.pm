@@ -9,7 +9,7 @@ use MooseX::NonMoose;
 use MooseX::MarkAsMethods autoclean => 1;
 extends 'DBIx::Class::Core';
 
-
+__PACKAGE__->table("inventories");
 
 __PACKAGE__->add_columns(
   "character_id",
@@ -17,16 +17,16 @@ __PACKAGE__->add_columns(
   "item_id",
   {data_type => "integer",extra => { unsigned => 1 }, is_nullable => 0},
   "item_quantity",
-  {data_type => "integer",extra => { unsigned => 1 }, is_nullable => 0}
-  );
+  {data_type => "integer",extra => { unsigned => 1 }, is_nullable => 0},
+);
 
 
 
 __PACKAGE__->set_primary_key("character_id","item_id");
 
 
-__PACKAGE__->belongs_to( 'character_id' => 'RPGCat::Schema::Result::Character', 'character_id' );
-__PACKAGE__->belongs_to( 'item_id' => 'RPGCat::Schema::Result::Item', 'item_id' );
+__PACKAGE__->belongs_to( 'character' => 'RPGCat::Schema::Result::Character', 'character_id' );
+__PACKAGE__->belongs_to( 'item' => 'RPGCat::Schema::Result::Item', 'item_id' );
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration

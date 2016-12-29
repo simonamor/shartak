@@ -9,7 +9,7 @@ use MooseX::NonMoose;
 use MooseX::MarkAsMethods autoclean => 1;
 extends 'DBIx::Class::Core';
 
-
+__PACKAGE__->table("tiles");
 
 __PACKAGE__->add_columns(
   "tile_id",
@@ -19,8 +19,8 @@ __PACKAGE__->add_columns(
   "colour_code",
   { data_type => "char", size => 6, is_nullable => 0 },
   "move_type",
-  { data_type => "char", size => 10, is_nullable => 0 }
-  );
+  { data_type => "char", size => 10, is_nullable => 0 },
+);
 
 
 
