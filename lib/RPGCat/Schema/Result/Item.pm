@@ -9,7 +9,7 @@ use MooseX::NonMoose;
 use MooseX::MarkAsMethods autoclean => 1;
 extends 'DBIx::Class::Core';
 
-
+__PACKAGE__->table("items");
 
 __PACKAGE__->add_columns(
   "item_id",
@@ -17,7 +17,7 @@ __PACKAGE__->add_columns(
   "item_name",
   { data_type => "char", is_nullable => 0, size => 32 },
   "item_type",
-  { data_type => "char", size => 32, is_nullable => 0 }
+  { data_type => "char", size => 32, is_nullable => 0 },
   );
 
 __PACKAGE__->load_components("InflateColumn::Serializer");

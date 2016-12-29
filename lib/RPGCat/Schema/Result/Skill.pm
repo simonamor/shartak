@@ -9,7 +9,7 @@ use MooseX::NonMoose;
 use MooseX::MarkAsMethods autoclean => 1;
 extends 'DBIx::Class::Core';
 
-
+__PACKAGE__->table("skills");
 
 __PACKAGE__->add_columns(
   "skill_id",
@@ -18,8 +18,7 @@ __PACKAGE__->add_columns(
   { data_type => "char", is_nullable => 0, size => 32 },
   "skill_requirements",
   { data_type => "char", size => 32, is_nullable => 0 },
-  "skill_effects"
-  );
+);
 
 __PACKAGE__->load_components("InflateColumn::Serializer");
 
@@ -30,7 +29,7 @@ __PACKAGE__->add_columns( 'skill_data' => {
     'serializer_options' => { allow_blessed => 0 }
 });
 
-__PACKAGE__->add_columns( 'skill_prerequisits' => {
+__PACKAGE__->add_columns( 'skill_prerequisites' => {
     data_type => "mediumtext",
     is_nullable => 0,
     'serializer_class' => 'JSON',

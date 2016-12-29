@@ -1,5 +1,5 @@
 use utf8;
-package RPGCat::Schema::Result::Skills;
+package RPGCat::Schema::Result::Skillset;
 
 use strict;
 use warnings;
@@ -9,7 +9,7 @@ use MooseX::NonMoose;
 use MooseX::MarkAsMethods autoclean => 1;
 extends 'DBIx::Class::Core';
 
-
+__PACKAGE__->table("skillsets");
 
 __PACKAGE__->add_columns(
   "character_id",
@@ -25,8 +25,8 @@ __PACKAGE__->add_columns(
 __PACKAGE__->set_primary_key("character_id","skill_id");
 
 
-__PACKAGE__->belongs_to( 'character_id' => 'RPGCat::Schema::Result::Character', 'character_id' );
-__PACKAGE__->belongs_to( 'skill_id' => 'RPGCat::Schema::Result::Skill', 'skill_id' );
+__PACKAGE__->belongs_to( 'character' => 'RPGCat::Schema::Result::Character', 'character_id' );
+__PACKAGE__->belongs_to( 'skill' => 'RPGCat::Schema::Result::Skill', 'skill_id' );
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration
