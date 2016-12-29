@@ -27,9 +27,9 @@ __PACKAGE__->add_columns(
 __PACKAGE__->set_primary_key("tile_id");
 
 
-__PACKAGE__->has_many( 'tile_id' => 'RPGCat::Schema::Result::Map', 'tile_id' );
+__PACKAGE__->has_many( 'maps' => 'RPGCat::Schema::Result::Map', 'tile_id' );
 
-__PACKAGE__->has_one( 'tile_id' => 'RPGCat::Schema::Result::Description', 'tile_id' );
+__PACKAGE__->has_one( 'description' => 'RPGCat::Schema::Result::Description', 'tile_id' );
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration

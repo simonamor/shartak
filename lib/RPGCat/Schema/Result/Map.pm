@@ -27,7 +27,7 @@ __PACKAGE__->add_columns(
 __PACKAGE__->set_primary_key("tile_x","tile_y","tile_z");
 
 
-__PACKAGE__->has_one( 'tile_id' => 'RPGCat::Schema::Result::Tile', 'tile_id' );
+__PACKAGE__->has_one( 'tile' => 'RPGCat::Schema::Result::Tile', 'tile_id' );
 
 
 

@@ -34,7 +34,7 @@ __PACKAGE__->set_primary_key("item_id");
 
 
 
-__PACKAGE__->many_to_many( 'item_id' => 'RPGCat::Schema::Result::Inventory', 'item_id' );
+__PACKAGE__->many_to_many( 'inventories' => 'RPGCat::Schema::Result::Inventory', 'item_id' );
 
 
 

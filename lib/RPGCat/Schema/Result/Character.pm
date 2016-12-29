@@ -36,8 +36,8 @@ __PACKAGE__->set_primary_key("character_id");
 __PACKAGE__->add_unique_constraint("name", ["name"]);
 
 
-__PACKAGE__->belongs_to( 'account_id' => 'RPGCat::Schema::Result::Account', 'account_id' );
-__PACKAGE__->might_have( 'character_id' => 'RPGCat::Schema::Result::Inventory', 'character_id' );
+__PACKAGE__->belongs_to( 'account' => 'RPGCat::Schema::Result::Account', 'account_id' );
+__PACKAGE__->might_have( 'inventory' => 'RPGCat::Schema::Result::Inventory', 'character_id' );
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration

@@ -41,7 +41,7 @@ __PACKAGE__->set_primary_key("skill_id");
 
 
 
-__PACKAGE__->might_have( 'skill_id' => 'RPGCat::Schema::Result::Skillset', 'skill_id' );
+__PACKAGE__->might_have( 'skill' => 'RPGCat::Schema::Result::Skillset', 'skill_id' );
 
 
 
