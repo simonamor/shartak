@@ -1,0 +1,48 @@
+RPGWNN Database Schema
+
+Character Table
+ID --------------- MEDIUMINT (Key)
+Name ~~~~~~~~~~~~~ CHAR(32)
+Owner ------------ MEDIUMINT (Account_ID Link)
+Current_Health ~~~ SMALLINT
+Current_Exp ~~~~~~ SMALLINT
+Max_AP ----------- SMALLINT
+Current_AP ~~~~~~~ SMALLINT
+
+
+Descriptions
+Character_ID ----- INT
+Description ~~~~~~ TEXT
+
+Item Table
+ID ------- MEDIUMINT(Key)
+Name ~~~~~ CHAR(32)
+Type ----- CHAR(10) or SMALLINT? (leaning CHAR(10) as this will make code more readable)
+Effects ~~~~~~ ENUM (each item lists a stat depending on item type)
+
+Skills
+ID ----------- SMALLINT
+Name ~~~~~~~~~ CHAR(32)
+Prerequisits - ENUM (each entry is a skill ID)
+
+
+Tiles
+ID ---------- MEDIUMINT
+Colour_Code ~ CHAR(6)(Hexidecimal colour code)
+Move_Type --- CHAR(10) or SMALLINT? (leaning CHAR(10) as this will make code more readable)
+
+Map
+X -- SMALLINT (Compound Key)
+Y ~~ SMALLINT (Compound Key)
+Z -- SMALLINT (Compound Key)
+ID ~ SMALLINT (Linked to Tiles Table)
+
+Inventory
+Character_ID - MEDIUMINT (Linked to Character Table)
+Item_ID ~~~~~~ MEDIUMINT (Linked to Item Table)
+Quantitiy ---- SMALLINT
+
+Skillsets
+Character_ID - MEDIUMINT (Linked to Character Table)
+Skill_ID ~~~~~ SMALLINT (Linked to Skill Table)
+
