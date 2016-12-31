@@ -2,6 +2,4 @@ name: RPGCat
 
 Model::DB:
     connect_info:
-        dsn: dbi:mysql:rpgcat_db
-        user: rpgcat_user
-        password: rpgcat_pass
+        dsn: dbi:SQLite:./rpgcat.db
