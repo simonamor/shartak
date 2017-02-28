@@ -112,8 +112,7 @@ my $dh = DBIx::Class::DeploymentHandler->new({
     schema => $model->schema,
     force_overwrite => 0,
     script_directory => __PACKAGE__->path_to("ddl")->stringify,
-    # FIXME: This should probably be a config option
-    databases => ['MySQL'],
+    databases => [ $model->schema->storage->sqlt_type ],
 });
 if ($dh->version_storage_is_installed) {
     if ($dh->next_version_set) {
