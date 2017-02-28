@@ -50,6 +50,12 @@ __PACKAGE__->config(
     enable_catalyst_header => 1, # Send X-Catalyst header
 );
 
+__PACKAGE__->config(
+    'Model::DB' => {
+        'dsn' => 'dbi:SQLite:./rpgcat.db',
+    }
+);
+
 # Authentication
 __PACKAGE__->config(
     'Plugin::Authentication' => {
