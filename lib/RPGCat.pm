@@ -116,16 +116,14 @@ my $dh = DBIx::Class::DeploymentHandler->new({
 });
 if ($dh->version_storage_is_installed) {
     if ($dh->next_version_set) {
-#        warn "next version set is not undef - we should call upgrade()";
+        # next version set is not undef - we should call upgrade()
         my $ret = eval {
             $dh->upgrade();
         };
         die "upgrade failed: $@\n" if $@;
-#    } else {
-#        warn "next version is undef - nothing to do";
     }
 } else {
-#    warn "version storage is installed - we should call install()";
+    # version storage is not installed - we should call install()
     my $ret = eval {
         $dh->install();
     };
