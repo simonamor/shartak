@@ -115,13 +115,13 @@ my $dh = DBIx::Class::DeploymentHandler->new({
     databases => [ $model->schema->storage->sqlt_type ],
 });
 if ($dh->version_storage_is_installed) {
-    if ($dh->next_version_set) {
-        # next version set is not undef - we should call upgrade()
-        my $ret = eval {
-            $dh->upgrade();
-        };
-        die "upgrade failed: $@\n" if $@;
-    }
+    # version storage is installed - we should call upgrade()
+    # if for any reason there is no upgrade required, it will
+    # simply return and continue with the rest of the app.
+    my $ret = eval {
+        $dh->upgrade();
+    };
+    die "upgrade failed: $@\n" if $@;
 } else {
     # version storage is not installed - we should call install()
     my $ret = eval {
