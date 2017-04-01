@@ -1,5 +1,5 @@
-name: RPGCat
-
 Model::DB:
     connect_info:
-        dsn: dbi:SQLite:./rpgcat.db
+        dsn: dbi:mysql:database=__ENV(MYSQL_DATABASE)__;host=__ENV(MYSQL_HOST)__
+        user: __ENV(MYSQL_USER)__
+        password: __ENV(MYSQL_PWD)__

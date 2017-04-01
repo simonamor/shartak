@@ -34,6 +34,8 @@ extends 'Catalyst';
 
 our $VERSION = '0.01';
 
+use DBIx::Class::DeploymentHandler;
+
 # Configure the application.
 #
 # Note that settings in rpgcat.conf (or other external
@@ -48,6 +50,15 @@ __PACKAGE__->config(
     # Disable deprecated behavior needed by old applications
     disable_component_resolution_regex_fallback => 1,
     enable_catalyst_header => 1, # Send X-Catalyst header
+
+#    default_view => 'HTML',
+    using_frontend_proxy => 1,
+);
+
+__PACKAGE__->config(
+    'Model::DB' => {
+        'dsn' => 'dbi:SQLite:./rpgcat.db',
+    }
 );
 
 # Authentication
@@ -91,6 +102,33 @@ __PACKAGE__->config(
 
 # Start the application
 __PACKAGE__->setup();
+
+# Auto-deploy the database schema or upgrade to the latest
+# - this uses DBIx::Class::DeploymentHandler so you have to
+# make sure the schema is generated correctly.
+
+my $model = __PACKAGE__->model('DB');
+my $dh = DBIx::Class::DeploymentHandler->new({
+    schema => $model->schema,
+    force_overwrite => 0,
+    script_directory => __PACKAGE__->path_to("ddl")->stringify,
+    databases => [ $model->schema->storage->sqlt_type ],
+});
+if ($dh->version_storage_is_installed) {
+    # version storage is installed - we should call upgrade()
+    # if for any reason there is no upgrade required, it will
+    # simply return and continue with the rest of the app.
+    my $ret = eval {
+        $dh->upgrade();
+    };
+    die "upgrade failed: $@\n" if $@;
+} else {
+    # version storage is not installed - we should call install()
+    my $ret = eval {
+        $dh->install();
+    };
+    die "install failed: $@\n" if $@;
+}
 
 =encoding utf8
 
