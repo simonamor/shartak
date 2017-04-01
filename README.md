@@ -60,7 +60,7 @@ there are any changes detected.
 Hopefully your final application will work on PaaS such as Heroku and Flynn
 without too many changes required.
 
-## LICENSING
+## Licensing
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of either:
