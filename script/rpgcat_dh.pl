@@ -1,6 +1,6 @@
 #!/usr/bin/env perl
 
-# ./script/rpgcat_dh.pl  -s RPGCat::Schema -I lib -o ./ddl/ \
+# ./script/rpgcat_dh.pl  -s RPGCat::Schema -I lib -o ./ddl/ \
 #   -c 'dbi:mysql:rpgcat_db;user=rpgcat_user;password=rpgcat_pass' \
 #   install
 

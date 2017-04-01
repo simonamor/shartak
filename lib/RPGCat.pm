@@ -104,7 +104,7 @@ __PACKAGE__->config(
 __PACKAGE__->setup();
 
 # Auto-deploy the database schema or upgrade to the latest
-# - this uses DBIx::Class::DeploymentHandler so you have to
+# - this uses DBIx::Class::DeploymentHandler so you have to
 # make sure the schema is generated correctly.
 
 my $model = __PACKAGE__->model('DB');

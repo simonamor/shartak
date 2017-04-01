@@ -1,0 +1,31 @@
+<h1>Account index page</h1>
+
+<p>Logged in as (account.email) [% account.email %]</p>
+
+<h2>Roles (account.roles):</h2>
+<ul>
+[% FOREACH r IN account.roles %]
+<li>(r) [% r %]</li>
+[% END %]
+</ul>
+
+<p>This can also be done via account.account_roles</p>
+<ul>
+[% FOREACH r IN account.account_roles %]
+<li>(r.role.role) [% r.role.role
+    # r.role is a 'Role' record which has role, description and role_id %]
+    (r.role.description) [% r.role.description %]</li>
+[% END %]
+</ul>
+
+<h2>Characters (account.characters)</h2>
+[% IF account.characters_rs.count == 0 %]
+<p>None found</p>
+[% ELSE %]
+<ul>
+[% FOREACH ch IN account.characters %]
+    <li>(character_id) [% ch.character_id %] (character_name) [% ch.character_name %]</li>
+[% END %]
+</ul>
+[% END %]
+

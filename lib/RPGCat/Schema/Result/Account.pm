@@ -111,9 +111,20 @@ __PACKAGE__->set_primary_key("account_id");
 
 __PACKAGE__->add_unique_constraint("email", ["email"]);
 
-__PACKAGE__->has_many( 'account_roles' => 'RPGCat::Schema::Result::AccountRole', 'account_id' );
+__PACKAGE__->has_many(
+    'account_roles' => 'RPGCat::Schema::Result::AccountRole',
+    { 'foreign.account_id' => 'self.account_id' }
+);
 
-__PACKAGE__->many_to_many('roles' => 'account_roles', 'role');
+# $account->account_roles->role
+__PACKAGE__->many_to_many(
+    'roles' => 'account_roles', 'role'
+);
+
+__PACKAGE__->has_many(
+    'characters' => 'RPGCat::Schema::Result::Character',
+    { 'foreign.account_id' => 'self.account_id' }
+);
 
 __PACKAGE__->meta->make_immutable;
 1;
