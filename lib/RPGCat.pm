@@ -92,12 +92,11 @@ __PACKAGE__->config(
 # Start the application
 __PACKAGE__->setup();
 
-
 =encoding utf8
 
 =head1 NAME
 
-RPGCat - Catalyst based application
+RPGCat - Browser based RPG framework using Catalyst
 
 =head1 SYNOPSIS
 
@@ -105,7 +104,9 @@ RPGCat - Catalyst based application
 
 =head1 DESCRIPTION
 
-[enter your description here]
+This is one of the many versions of RPGWNN (Role Playing Game With No Name).
+It was started in 2016 after the experimental Python version didn't make much
+progress.
 
 =head1 SEE ALSO
 
@@ -113,12 +114,33 @@ L<RPGCat::Controller::Root>, L<Catalyst>
 
 =head1 AUTHOR
 
-Catalyst developer
+Simon Amor <simon@leaky.org>
 
 =head1 LICENSE
 
-This library is free software. You can redistribute it and/or modify
-it under the same terms as Perl itself.
+This program is free software; you can redistribute it and/or modify
+it under the terms of either:
+
+    a) the GNU General Public License as published by the Free
+    Software Foundation; either version 1, or (at your option) any
+    later version, or
+
+    b) the "Artistic License" version 2 which comes with this program.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See either
+the GNU General Public License or the Artistic License for more details.
+
+You should have received a copy of the Artistic License with this
+program in the file named "LICENSES/Artistic-2_0". If not, please visit
+http://www.perlfoundation.org/artistic_license_2_0
+
+You should also have received a copy of the GNU General Public License
+along with this program in the file named "LICENSES/Copying". If not,
+write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
+Boston, MA 02110-1301, USA or visit their web page on the internet at
+http://www.gnu.org/copyleft/gpl.html
 
 =cut
 
