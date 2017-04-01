@@ -36,3 +36,14 @@ if (grep { /write_ddl/ } @ARGV) {
 }
 
 RPGCat::DH->new_with_options->run;
+
+=head1 AUTHOR
+
+Simon Amor <simon@leaky.org>
+
+=head1 LICENSE
+
+This program is free software; but please see the LICENSING file for
+more information.
+
+=cut

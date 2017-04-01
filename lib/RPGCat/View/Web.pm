@@ -30,12 +30,12 @@ L<RPGCat>
 
 =head1 AUTHOR
 
-A clever guy
+Simon Amor <simon@leaky.org>
 
 =head1 LICENSE
 
-This library is free software. You can redistribute it and/or modify
-it under the same terms as Perl itself.
+This program is free software; but please see the LICENSING file for
+more information.
 
 =cut
 

@@ -112,21 +112,18 @@ my $dh = DBIx::Class::DeploymentHandler->new({
     schema => $model->schema,
     force_overwrite => 0,
     script_directory => __PACKAGE__->path_to("ddl")->stringify,
-    # FIXME: This should probably be a config option
-    databases => ['MySQL'],
+    databases => [ $model->schema->storage->sqlt_type ],
 });
 if ($dh->version_storage_is_installed) {
-    if ($dh->next_version_set) {
-#        warn "next version set is not undef - we should call upgrade()";
-        my $ret = eval {
-            $dh->upgrade();
-        };
-        die "upgrade failed: $@\n" if $@;
-#    } else {
-#        warn "next version is undef - nothing to do";
-    }
+    # version storage is installed - we should call upgrade()
+    # if for any reason there is no upgrade required, it will
+    # simply return and continue with the rest of the app.
+    my $ret = eval {
+        $dh->upgrade();
+    };
+    die "upgrade failed: $@\n" if $@;
 } else {
-#    warn "version storage is installed - we should call install()";
+    # version storage is not installed - we should call install()
     my $ret = eval {
         $dh->install();
     };
@@ -137,7 +134,7 @@ if ($dh->version_storage_is_installed) {
 
 =head1 NAME
 
-RPGCat - Catalyst based application
+RPGCat - Browser based RPG framework using Catalyst
 
 =head1 SYNOPSIS
 
@@ -145,7 +142,9 @@ RPGCat - Catalyst based application
 
 =head1 DESCRIPTION
 
-[enter your description here]
+This is one of the many versions of RPGWNN (Role Playing Game With No Name).
+It was started in 2016 after the experimental Python version didn't make much
+progress.
 
 =head1 SEE ALSO
 
@@ -153,12 +152,33 @@ L<RPGCat::Controller::Root>, L<Catalyst>
 
 =head1 AUTHOR
 
-Catalyst developer
+Simon Amor <simon@leaky.org>
 
 =head1 LICENSE
 
-This library is free software. You can redistribute it and/or modify
-it under the same terms as Perl itself.
+This program is free software; you can redistribute it and/or modify
+it under the terms of either:
+
+    a) the GNU General Public License as published by the Free
+    Software Foundation; either version 1, or (at your option) any
+    later version, or
+
+    b) the "Artistic License" version 2 which comes with this program.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See either
+the GNU General Public License or the Artistic License for more details.
+
+You should have received a copy of the Artistic License with this
+program in the file named "LICENSES/Artistic-2_0". If not, please visit
+http://www.perlfoundation.org/artistic_license_2_0
+
+You should also have received a copy of the GNU General Public License
+along with this program in the file named "LICENSES/Copying". If not,
+write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
+Boston, MA 02110-1301, USA or visit their web page on the internet at
+http://www.gnu.org/copyleft/gpl.html
 
 =cut
 
