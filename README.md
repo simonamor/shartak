@@ -1,14 +1,14 @@
 # rpgcat
 Catalyst based RPG framework
 
-## About
+## About
 
 The aim of this application is to serve as a fairly functional base to
 design your own Browser based RPG. It probably won't be fancy but we
 hope there is enough to get a basic game up and running quite fast. The
 actual content (the map for example) is left for you to provide!
 
-## Installation
+## Installation
 
 This works best if you install a local version of Perl and all
 associated modules. This can be done as follows:
