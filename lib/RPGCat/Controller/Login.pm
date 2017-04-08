@@ -16,9 +16,11 @@ Catalyst Controller.
 
 =head2 index
 
+This is the main login page
+
 =cut
 
-sub login_index :Path :Args(0) {
+sub login_index :Path("/login") Args(0) {
     my ( $self, $c ) = @_;
 
     my $email = $c->request->param('email');
@@ -58,6 +60,36 @@ sub login_index :Path :Args(0) {
 
     $c->stash(
         template => "login.html"
+    );
+}
+
+=head2 logout
+
+Logout the current account
+
+=cut
+
+sub logout :Path('/logout') :Args(0) {
+    my ( $self, $c ) = @_;
+
+    # Log the user out
+    $c->logout;
+
+    # Send the user to the starting point
+    $c->response->redirect($c->uri_for('/'));
+}
+
+=head2 signup
+
+The signup page for new accounts.
+
+=cut
+
+sub signup :Path("/signup") Args(0) {
+    my ($self, $c) = @_;
+
+    $c->stash(
+        template => "signup.html",
     );
 }
 

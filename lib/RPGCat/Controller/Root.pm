@@ -54,17 +54,6 @@ sub default :Path {
     $c->response->status(404);
 }
 
-sub logout :Path('/logout') :Args(0) {
-    my ( $self, $c ) = @_;
-
-    # Log the user out
-    $c->logout;
-
-    # Send the user to the starting point
-    $c->response->redirect($c->uri_for('/'));
-}
-
-
 sub auto :Private {
     my ($self, $c) = @_;
 
