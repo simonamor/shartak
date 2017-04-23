@@ -88,9 +88,81 @@ The signup page for new accounts.
 sub signup :Path("/signup") Args(0) {
     my ($self, $c) = @_;
 
-    $c->stash(
-        template => "signup.html",
+    $c->stash( template => "signup.html" );
+    unless ($c->request->method =~ /^POST$/i) {
+        $c->detach();
+    }
+
+    my $email = $c->request->params->{ 'email' };
+    my $password = $c->request->params->{ 'password' };
+
+    # Process to follow...
+
+    # Enter an email and password. Account is created. "Verification
+    # email has been sent to $email" is shown. User redirected to login page.
+
+    # If the account already existed, they'll more than likely have the
+    # wrong password when they try to login - at that point the legit
+    # user with that email will have received something like "We
+    # received a request for a new account with this email. You already
+    # have an account so the new account was NOT created. If you have
+    # forgotten your password, you can <reset it>."
+
+    # If the account didn't exist, the email says "We received a request
+    # for a new account with this email. If this was requested by yourself,
+    # <confirm your email>. If it was not requested by you, <deactivate
+    # the account>"
+
+    my $account = eval {
+        $c->model('DB::Account')->create({
+            email => $email,
+            password => $password,
+        });
+    };
+    if ($@ || (! defined $account)) {
+
+        # An account most likely already exists with this email address
+
+        # FIXME: At this point, we could re-populate the form, but since
+        # we don't want to provide their password in the page source, and
+        # the email they picked already has an account, there's not a lot
+        # of point!
+
+        # FIXME: Send email to $email
+
+    } else {
+
+        # FIXME: Send verification email to $email asking user to confirm
+        # their email address (note - this does not log them in!)
+    }
+
+    # Now we redirect to the login page. If it was a new account, they'll
+    # know the password and it'll allow them to confirm that they know what
+    # it is (and maybe auto-store in password manager)
+    # If it was an attempt to create a duplicate, then chances are they
+    # won't know the password and will then get the option to recover the
+    # password through the normal route.
+
+    $c->response->redirect(
+        $c->uri_for("/login", {
+            mid => $c->set_success_msg(
+                "A confirmation email has been sent."
+            )
+        })
     );
+}
+
+=head2 forgot
+
+This page allows a user to request a password reset link.
+
+=cut
+
+sub forgot :Path("/forgot") Args(0) {
+    my ($self, $c) = @_;
+
+    $c->stash( template => "forgot.html" );
+
 }
 
 =encoding utf8

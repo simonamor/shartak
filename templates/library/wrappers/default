@@ -18,10 +18,11 @@
 <body>
 
 
-[% IF status_msg OR error_msg -%]
+[% IF status_msg OR error_msg OR success_msg -%]
 <div class="status_container">
 [% IF status_msg %]<div class="status_message">[% status_msg %]</div>[% END %]
 [% IF error_msg %]<div class="status_message error">[% error_msg %]</div>[% END %]
+[% IF success_msg %]<div class="status_message success">[% success_msg %]</div>[% END %]
 </div>
 [% END -%]
 
