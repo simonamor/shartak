@@ -1,0 +1,18 @@
+[% page.title = "Reset your password" -%]
+
+<h1>Reset password</h1>
+
+<form method="post" action="/forgot">
+  <table>
+    <tr>
+      <td>Email:</td>
+      <td><input type="text" name="email" size="40" /></td>
+    </tr>
+    <tr>
+      <td colspan="2"><input class="bttn" type="submit" name="submit" value="Request reset" /></td>
+    </tr>
+  </table>
+</form>
+
+<p>Not got an account? <a href="/signup">Sign up</a></p>
+<p>Remembered your password? <a href="/login">Login</a></p>
