@@ -29,7 +29,9 @@ extends 'DBIx::Class::Core';
 
 =cut
 
-__PACKAGE__->load_components("InflateColumn::DateTime", "TimeStamp", "PassphraseColumn");
+__PACKAGE__->load_components(
+    "InflateColumn::DateTime", "TimeStamp", "PassphraseColumn"
+);
 
 =head1 TABLE: C<accounts>
 
@@ -57,6 +59,30 @@ __PACKAGE__->table("accounts");
   data_type: 'text'
   is_nullable: 1
 
+=head2 date_signup
+
+  data_type: 'datetime'
+  is_nullable: 0
+  set_on_create: 1
+  set_on_update: 0
+  datetime_undef_if_invalid: 1
+
+=head2 date_verified
+
+  data_type: 'datetime'
+  is_nullable: 1
+  default_value: undef
+  set_on_create: 0
+  set_on_update: 0
+  datetime_undef_if_invalid: 1
+
+=head2 date_verified
+
+  data_type: 'datetime'
+  is_nullable: 0
+  default_value: 0
+  datetime_undef_if_invalid: 1
+
 =cut
 
 __PACKAGE__->add_columns(
@@ -68,7 +94,9 @@ __PACKAGE__->add_columns(
     },
     # Anyone with an email address longer than 128 characters will have problems
     "email" => {
-        data_type => "char", is_nullable => 0, size => 128
+        data_type => "char",
+        is_nullable => 0,
+        size => 128
     },
     # Have the 'password' column use a SHA-1 hash and 20-byte salt
     # with RFC 2307 encoding; Generate the 'check_password" method
@@ -82,6 +110,29 @@ __PACKAGE__->add_columns(
             salt_random => 20,
         },
         passphrase_check_method => 'check_password',
+    },
+    'date_signup' => {
+        data_type => "datetime",
+        is_nullable => 0,
+        set_on_create => 1,
+        set_on_update => 0,
+        datetime_undef_if_invalid => 1,
+    },
+    'date_verified' => {
+        data_type => "datetime",
+        is_nullable => 1,
+        default_value => undef,
+        set_on_create => 0,
+        set_on_update => 0,
+        datetime_undef_if_invalid => 1,
+    },
+    "date_lastlogin" => {
+        data_type => "datetime",
+        is_nullable => 1,
+        default_value => undef,
+        set_on_create => 0,
+        set_on_update => 0,
+        datetime_undef_if_invalid => 1,
     },
 );
 

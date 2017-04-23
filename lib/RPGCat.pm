@@ -74,7 +74,9 @@ __PACKAGE__->config(
             },
             credential => {
                 class           => 'Password',
+                password_field  => 'password',
                 password_type   => 'self_check',
+                password_hash_type => 'SHA-256',
             },
         },
     },
@@ -99,9 +101,25 @@ __PACKAGE__->config(
     },
 );
 
+# Extend status messages to include a success message (green bar) as well
+# as the default status and error messages (grey and red bars)
+__PACKAGE__->config(
+    'Plugin::StatusMessage' => {
+        msg_types => [ qw(status error success) ],
+        success_msg_stash_key => 'success_msg',
+    }
+);
 
 # Start the application
 __PACKAGE__->setup();
+
+# Call this after setup() so the module is already loaded
+# This adds set_success_msg() in addition to the default
+# set_status_msg and set_error_msg provided by Plugin::StatusMessage
+Catalyst::Plugin::StatusMessage->make_status_message_get_set_methods_for_type($_) for qw(success);
+
+__PACKAGE__->log->levels( qw/info warn error fatal/ )
+    unless __PACKAGE__->debug;
 
 # Auto-deploy the database schema or upgrade to the latest
 # - this uses DBIx::Class::DeploymentHandler so you have to

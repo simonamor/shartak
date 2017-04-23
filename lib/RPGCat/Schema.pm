@@ -7,7 +7,7 @@ extends 'DBIx::Class::Schema';
 
 __PACKAGE__->load_namespaces;
 
-our $VERSION = 3;
+our $VERSION = 4;
 
 __PACKAGE__->meta->make_immutable(inline_constructor => 0);
 1;
