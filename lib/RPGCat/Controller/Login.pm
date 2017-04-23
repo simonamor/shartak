@@ -23,8 +23,8 @@ This is the main login page
 sub login_index :Path("/login") Args(0) {
     my ( $self, $c ) = @_;
 
-    my $email = $c->request->param('email');
-    my $password = $c->request->param('password');
+    my $email = $c->request->params->{ 'email' };
+    my $password = $c->request->params->{ 'password' };
 
     if ($email && $password) {
 
