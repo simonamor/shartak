@@ -3,8 +3,11 @@
 <p>Access number [% counter %]</p>
 
 [% IF c.user %]
-User [% c.user.email %] logged in.
-<a href="/logout">Logout</a>
+<p>User [% c.user.email %] logged in.</p>
+<p>
+    <a href="/account">Account page</a>
+    <a href="/logout">Logout</a>
+</p>
 [% ELSE %]
-<a href="/login">Login</a>
+<p><a href="/login">Login</a></p>
 [% END %]

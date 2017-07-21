@@ -36,6 +36,12 @@ around execute => sub {
         $c->response->redirect( $c->uri_for("/login") );
         $c->detach();
     }
+
+    # Can we stash the account here for later use?
+    $c->stash(
+        account => $c->user
+    );
+
     return $self->$orig(@args);
 };
 

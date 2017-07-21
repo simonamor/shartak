@@ -49,6 +49,8 @@ requires 'Catalyst::Plugin::Authorization::Roles';
 requires 'Catalyst::Plugin::StatusMessage';
 requires 'Catalyst::Authentication::Store::DBIx::Class';
 
+requires 'HTML::FormHandler';
+
 install_script glob('script/*.pl');
 auto_install;
 WriteAll;
