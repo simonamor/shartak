@@ -87,10 +87,20 @@ sub character_create :Chained("character_chain") PathPart("create") Args(0) {
     # 2. Check if name exists in db already
     # 3. Create character and link to account
 
+    my $old_character = $c->model('DB::Character')->find({
+        character_name => $fp->{ character_name }
+    });
+    if ($old_character && $old_character->character_id) {
+        $create_form->add_form_error(
+            "Error creating character. Name in use already."
+        );
+        $c->detach();
+    }
+
     # Potential race condition between 2 & 3 so character name is a unique
     # key and if an error occurs when inserting, we assume it's because
-    # the name is already taken. This combines steps 2 and 3, eliminating
-    # the race condition.
+    # the name is already taken. We still check for the existing name since
+    # MySQL increments the id even if it fails to insert.
 
     $c->log->debug("adding new character " . $fp->{ character_name });
     my $new_character = eval {
