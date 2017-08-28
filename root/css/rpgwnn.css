@@ -1,1 +1,29 @@
 /* RPGWNN Stylesheet */
+
+/* ==== Status Messages ========================= */
+.status_message {
+    margin-bottom: 10px;
+    padding: 10px;
+    display: block;
+    float: none;
+    clear: both;
+    border: 1px solid #CCC;
+    background-color: #EEE;
+}
+.success, .error {
+    background-repeat: no-repeat;
+    background-position: left top;
+    padding-left: 40px;
+    color: #FFF;
+    border: none;
+    min-height: 26px;
+}
+.success {
+    background-color: #008000;
+    background-image: url('/static/images/success.png');
+}
+.error {
+    background-color: #D90000;
+    background-image: url('/static/images/error.png');
+}
+
