@@ -17,6 +17,7 @@
 </head>
 <body>
 
+[% PROCESS "header.inc" %]
 
 [% IF status_msg OR error_msg OR success_msg -%]
 <div class="status_container">
@@ -27,6 +28,9 @@
 [% END -%]
 
 [% content %]
+
+[% PROCESS "footer.inc" %]
+
 <script type="text/javascript" src="/js/jquery-1.12.4.min.js"></script>
 [% FOREACH js IN page.js_files;
     IF NOT js.search('^http') AND NOT js.search('^/');
