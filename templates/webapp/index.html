@@ -1,13 +1,7 @@
-<h1>The index page!</h1>
+<h2>The index page!</h2>
 
 <p>Access number [% counter %]</p>
 
 [% IF c.user %]
 <p>User [% c.user.email %] logged in.</p>
-<p>
-    <a href="/account">Account page</a>
-    <a href="/logout">Logout</a>
-</p>
-[% ELSE %]
-<p><a href="/login">Login</a></p>
 [% END %]
