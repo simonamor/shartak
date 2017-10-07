@@ -1,3 +1,7 @@
+Model::EMKit:
+    from_email: rpgcat@example.net
+    from_name: RPGCat
+
 Model::DB:
     connect_info:
         dsn: dbi:mysql:database=__ENV(MYSQL_DATABASE)__;host=__ENV(MYSQL_HOST)__

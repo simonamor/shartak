@@ -162,7 +162,49 @@ sub forgot :Path("/forgot") Args(0) {
     my ($self, $c) = @_;
 
     $c->stash( template => "forgot.html" );
+    my $email = $c->request->params->{ 'email' };
 
+    # Not a form submission, just the GET so show the form.
+    unless ($email) { $c->detach(); }
+
+    # Tell the user we're doing something.
+    $c->stash( success_msg => "An email is being sent with instructions." );
+
+    # Find the account by email address
+    my $account = eval {
+        $c->model('DB::Account')->search({ email => $email })->single();
+    };
+    if ($@ || ! defined $account) {
+        # Something went wrong, or we didn't find the user account
+        $c->log->debug("No user found for $email");
+
+        my $emkit = $c->model('EMKit',
+                transport_class => 'Email::Sender::Transport::Sendmail');
+        $emkit = $emkit->template("forgotten-notexists.mkit", {
+                destination_email => $email,
+                account => undef,
+                config_url  => $c->uri_for('/'),
+                config_name => $c->config->{ name },
+            })
+            ->to( $email );
+        $emkit->send();
+
+        $c->detach();
+    } else {
+        $c->log->debug("User found " . $account->account_id );
+        my $emkit = $c->model('EMKit',
+                transport_class => 'Email::Sender::Transport::Sendmail')
+            ->template("forgotten-exists.mkit", {
+                destination_email => $account->email,
+                account => $account,
+                config_url  => $c->uri_for('/'),
+                config_name => $c->config->{ name },
+            })
+            ->to( $account->email );
+        $emkit->send();
+
+        $c->detach();
+    }
 }
 
 =encoding utf8
