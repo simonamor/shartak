@@ -49,6 +49,11 @@ requires 'Catalyst::Plugin::Authorization::Roles';
 requires 'Catalyst::Plugin::StatusMessage';
 requires 'Catalyst::Authentication::Store::DBIx::Class';
 
+requires 'Catalyst::Model::Factory';
+requires 'Email::MIME::Kit';
+requires 'Email::Sender::Simple';
+requires 'Email::MIME::Kit::Renderer::TT';
+
 requires 'HTML::FormHandler';
 
 install_script glob('script/*.pl');

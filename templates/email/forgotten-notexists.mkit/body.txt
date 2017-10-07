@@ -1,0 +1,5 @@
+Hi [% destination_email %]
+
+Thanks for trying to recover your password for [% config_name %] but it seems that you don't have an account.
+
+In order to play, simply visit [% config_url %] and register a new account.
