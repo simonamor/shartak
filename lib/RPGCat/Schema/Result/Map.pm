@@ -12,27 +12,25 @@ extends 'DBIx::Class::Core';
 __PACKAGE__->table("maps");
 
 __PACKAGE__->add_columns(
-  "tile_id",
-  {data_type => "integer",extra => { unsigned => 1 }, is_nullable => 0},
-  "tile_x",
-  {data_type => "integer",extra => { unsigned => 0 }, is_nullable => 0},
-  "tile_y",
-  {data_type => "integer",extra => { unsigned => 0 }, is_nullable => 0},
-  "tile_z",
-  {data_type => "integer",extra => { unsigned => 0 }, is_nullable => 0},
-  );
+    "map_id",
+    {data_type => "integer",extra => { unsigned => 1 }, is_nullable => 0},
+    "map_x",
+    {data_type => "integer",extra => { unsigned => 0 }, is_nullable => 0},
+    "map_y",
+    {data_type => "integer",extra => { unsigned => 0 }, is_nullable => 0},
+    "map_z",
+    {data_type => "integer",extra => { unsigned => 0 }, is_nullable => 0},
+    "tile_type_id",
+    { data_type => "integer", extra => { unsigned => 0 }, is_nullable => 0 },
+    "name",
+    { data_type => "char", size => 64, is_nullable => 1 },
+);
 
+__PACKAGE__->set_primary_key("map_id");
 
+__PACKAGE__->add_unique_constraint("map_coords" => ["map_x","map_y","map_z"]);
 
-__PACKAGE__->set_primary_key("tile_id");
+__PACKAGE__->has_one( 'tile_type' => 'RPGCat::Schema::Result::TileType', 'tile_type_id' );
 
-__PACKAGE__->add_unique_constraint("tile_coords" => ["tile_x","tile_y","tile_z"]);
-
-
-__PACKAGE__->has_one( 'tile' => 'RPGCat::Schema::Result::Tile', 'tile_id' );
-
-
-
-# You can replace this text with custom code or comments, and it will be preserved on regeneration
 __PACKAGE__->meta->make_immutable;
 1;
