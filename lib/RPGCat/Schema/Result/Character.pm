@@ -26,14 +26,28 @@ __PACKAGE__->add_columns(
   { data_type => "integer", extra => { unsigned => 1 }, is_nullable => 0 },
   "character_ap",
   { data_type => "integer", extra => { unsigned => 1 }, is_nullable => 0 },
-  );
+
+    "map_x",
+    { data_type => "integer", extra => { unsigned => 0 }, is_nullable => 0, default => 0 },
+    "map_y",
+    { data_type => "integer", extra => { unsigned => 0 }, is_nullable => 0, default => 0 },
+    "map_z",
+    { data_type => "integer", extra => { unsigned => 0 }, is_nullable => 0, default => 0 },
+);
 
 
 
 __PACKAGE__->set_primary_key("character_id");
 
-
 __PACKAGE__->add_unique_constraint("character_name", ["character_name"]);
+
+__PACKAGE__->has_one( 'location' => 'RPGCat::Schema::Result::Map',
+    {
+        'foreign.map_x' => 'self.map_x',
+        'foreign.map_y' => 'self.map_y',
+        'foreign.map_z' => 'self.map_z',
+    }
+);
 
 
 __PACKAGE__->belongs_to( 'account' => 'RPGCat::Schema::Result::Account', 'account_id' );
