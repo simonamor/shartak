@@ -13,7 +13,7 @@ __PACKAGE__->table("maps");
 
 __PACKAGE__->add_columns(
     "map_id",
-    {data_type => "integer",extra => { unsigned => 1 }, is_nullable => 0},
+    {data_type => "integer",extra => { unsigned => 1 }, is_nullable => 0, is_auto_increment => 1 },
     "map_x",
     {data_type => "integer",extra => { unsigned => 0 }, is_nullable => 0},
     "map_y",
