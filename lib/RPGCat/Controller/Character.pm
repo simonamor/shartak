@@ -122,6 +122,28 @@ sub character_create :Chained("character_chain") PathPart("create") Args(0) {
     }));
 }
 
+sub character_specific_chain :Chained("character_chain") :PathPart("") CaptureArgs(1) {
+    my ($self, $c, $character_id) = @_;
+
+    if ($c->user->search_related( 'characters' => {
+        character_id => $character_id } )->count() != 1) {
+        $c->response->redirect($c->uri_for("/account", {
+            mid => $c->set_error_msg(
+                "Character " . $character_id . " not found."
+            )
+        }));
+        $c->detach();
+    }
+
+    $c->session( active_character => $character_id );
+}
+
+sub character_select :Chained("character_specific_chain") :PathPart("select") Args(0) {
+    my ($self, $c) = @_;
+
+    $c->response->redirect($c->uri_for("/map"));
+}
+
 =head1 AUTHOR
 
 Simon Amor <simon@leaky.org>

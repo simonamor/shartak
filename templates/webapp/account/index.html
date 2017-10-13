@@ -24,7 +24,7 @@
 [% ELSE %]
 <ul>
 [% FOREACH ch IN account.characters %]
-    <li>(character_id) [% ch.character_id %] (character_name) [% ch.character_name %]</li>
+    <li>(character_id) [% ch.character_id %] (character_name) [% ch.character_name %] (<a href="/character/[% ch.character_id %]/select">Play</a>)</li>
 [% END %]
 </ul>
 [% END %]
