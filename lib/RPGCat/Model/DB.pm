@@ -10,6 +10,9 @@ __PACKAGE__->config(
         dsn => 'dbi:mysql:rpgcat_db',
         user => 'rpgcat_user',
         password => 'rpgcat_pass',
+
+        # UTF8 please!
+        mysql_enable_utf8 => 1,
     }
 );
 
