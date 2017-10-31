@@ -47,7 +47,7 @@ found at https://help.github.com/articles/syncing-a-fork/
 
 To run the application for development purposes, use the following command:
 
-    script/rpgcat_server -r -d --fork
+    script/rpgcat_server.pl -r -d --fork
 
 If you don't use --fork, it'll only run a single thread which will cause
 simultaneous requests to hang until the previous request has finished.
