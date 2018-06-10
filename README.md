@@ -1,3 +1,27 @@
+# What is Shartak?
+
+Shartak is a browser-based RPG that dates back to 2005.
+
+Plans are underway to update the code, rework the interface and potentially make some, perhaps all, of the source available. Whether those plans will actually come to anything remain to be seen.
+
+## The current version
+
+* can be found at http://www.shartak.com/
+* is written using Perl and runs on Apache with mod_perl and MySQL
+* was partially reworked to use multi-character accounts back in 2009 ("v2")
+
+## The new version
+
+* will still be written in Perl but using the Catalyst framework as a standalone application
+* will use DBIx::Class
+* will use MySQL but hopefully also handle PostgresQL or SQLite as a database
+* will have a better User Interface
+* will make more use of Javascript
+* will handle most of the original urls and redirect to the new ones (e.g /profile.cgi?id=6 would redirect to /profile/6 or whatever the new character profile page is) so that links within the wiki, forum etc continue to work.
+* is based on RPGCat from https://github.com/reanimatedprojects/rpgcat
+
+# RPGCat readme
+
 # rpgcat
 Catalyst based RPG framework
 
